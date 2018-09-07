@@ -12,13 +12,15 @@ class App extends Component {
 				<header>
 					<nav>
 						<Link to='/'>Landing</Link>
-						<Link to='/Library'>Library</Link>
+						<Link to='/library'>Library</Link>
+						<Link to='/album'>Album</Link>
 					</nav>				
 					<h1>Bloc Jams</h1>
 				</header>
       	<main>
 					<Route exact path="/" component={Landing} />
-					<Route exact path="/library" component={Library} />
+					<Route path="/library" component={Library} />
+					<Route path="/album" component={album} />
 				</main>
 			</div>
     );
