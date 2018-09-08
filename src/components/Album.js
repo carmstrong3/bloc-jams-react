@@ -11,7 +11,9 @@ class Album extends Component {
 		this.state = {
 			album: album,
 			currentSong: album.songs[0],
-			isPlaying: false
+			isPlaying: false,
+			isPlayVisible: false,
+			isPauseVisible: false
 		};		
 
 		this.audioElement = document.createElement('audio');
@@ -35,13 +37,34 @@ class Album extends Component {
 
 	handleSongClick(song) {
 		const isSameSong = this.state.currentSong === song;
+		const pauseButton = <button className="icon ion-md-pause"></button>;
 		if (this.state.isPlaying && isSameSong) {
 			this.pause();
 		} else {
 			if (!isSameSong) { this.setSong(song); }
-			this.play();
+		this.play();
 		}
 	}
+	
+	handleSongEnter(song, index) {
+		const isSameSong = this.state.currentSong === song;
+		const playButton = <button className="icon ion-md-play"></button>;
+		const pauseButton = <button className="icon ion-md-pause"></button>;
+		
+	}
+	
+	togglePlayVisible () {
+		this.setState({
+			isPlayVisible: !this.state.isPlayVisible})
+			console.log(this.state.isPlayVisible);
+	}
+
+	handleSongLeave(song) {
+	
+	}			
+		
+
+/* Steps. */
 
 	render() {
 		return (
@@ -62,10 +85,11 @@ class Album extends Component {
 					</colgroup>
 					<tbody>
 						{	this.state.album.songs.map( (song, index) =>
-							<tr className="song" key={index} onClick={() => this.handleSongClick(song)}>
-								<th>Track {index}</th>
-								<th>{song.title}</th>
-								<th>{song.duration} seconds</th>
+							<tr className="song" key={index} onClick={() => this.handleSongClick(song)} > 		
+		 						<span className="icon ion-md-play"></span>
+									<td className="songNumber" display="none">Track {index}</td>
+								<td className="songTitle">{song.title}</td>
+								<td className="songDuration">{song.duration} seconds</td>
 							</tr>
 							)
 						}
