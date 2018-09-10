@@ -55,6 +55,7 @@ class Album extends Component {
 
 
 	render() {
+		var obj = this.state.currentsong;
 		const hideButtonOrNumber = {
 			display: "none"
 		};
@@ -70,7 +71,7 @@ I'm guessing this is because it is on the render side. But when I made the funct
 		const showPlayOnHover = this.state.isPlayVisible === true ? showButtonOrNumber: hideButtonOrNumber;
 		
 		/*As this is, it shows up for all when something plays. For all three of these, I need to figure out how to specifically reference songs by index.*/
-		const showPauseOnPlay = this.state.isPlaying === true ? /*this doesn't work but I'd like it to ;) this.currentSong === song */ showButtonOrNumber: hideButtonOrNumber ;
+		const showPauseOnPlay = this.state.isPlaying === true ? /*testing obj.innerHTML*/ (obj.innerHTML = "style=" + showButtonOrNumber): hideButtonOrNumber ;
  
 		return (
 			<section className="album">
