@@ -12,8 +12,6 @@ class Album extends Component {
 			album: album,
 			currentSong: album.songs[0],
 			isPlaying: false,
-			isPlayVisible: false,
-			isPauseVisible: false
 		};		
 
 		this.audioElement = document.createElement('audio');
@@ -37,36 +35,31 @@ class Album extends Component {
 
 	handleSongClick(song) {
 		const isSameSong = this.state.currentSong === song;
-		const pauseButton = <button className="icon ion-md-pause"></button>;
+		const pauseButton = document.getElementsByClassName('icon ion-md-pause');
 		if (this.state.isPlaying && isSameSong) {
 			this.pause();
 		} else {
 			if (!isSameSong) { this.setSong(song); }
-		this.play();
+		this.play();	
 		}
 	}
 	
-	handleSongEnter(song, index) {
-		const isSameSong = this.state.currentSong === song;
-		const playButton = <button className="icon ion-md-play"></button>;
-		const pauseButton = <button className="icon ion-md-pause"></button>;
-		
-	}
 	
 	togglePlayVisible () {
 		this.setState({
 			isPlayVisible: !this.state.isPlayVisible})
 			console.log(this.state.isPlayVisible);
-	}
-
-	handleSongLeave(song) {
+	}	
 	
-	}			
-		
 
-/* Steps. */
 
 	render() {
+		const hideButtonOrNumber = {
+			display: "none"
+		};
+		const showButtonOrNumber = {
+			display: "inline"
+		};	
 		return (
 			<section className="album">
 				<section id="album-info">
@@ -86,10 +79,11 @@ class Album extends Component {
 					<tbody>
 						{	this.state.album.songs.map( (song, index) =>
 							<tr className="song" key={index} onClick={() => this.handleSongClick(song)} > 		
-		 						<span className="icon ion-md-play"></span>
-									<td className="songNumber" display="none">Track {index}</td>
-								<td className="songTitle">{song.title}</td>
-								<td className="songDuration">{song.duration} seconds</td>
+		 						<span id="play-button" className="icon ion-md-play" style={hideButtonOrNumber}></span>
+								<span id="pause-button" className="icon ion-md-pause" style={hideButtonOrNumber}></span>
+									<td id="song-number" style={showButtonOrNumber}>Track {index}</td>
+								<td id="song-title">{song.title}</td>
+								<td id="song-duration">{song.duration} seconds</td>
 							</tr>
 							)
 						}
