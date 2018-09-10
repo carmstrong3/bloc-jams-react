@@ -12,6 +12,7 @@ class Album extends Component {
 			album: album,
 			currentSong: album.songs[0],
 			isPlaying: false,
+			isPlayVisible: false,
 		};		
 
 		this.audioElement = document.createElement('audio');
@@ -44,11 +45,11 @@ class Album extends Component {
 		}
 	}
 	
-	
+	//added this but aren't actually using it as of yet. Just tested to make sure it worked.	
 	togglePlayVisible () {
 		this.setState({
-			isPlayVisible: !this.state.isPlayVisible})
-			console.log(this.state.isPlayVisible);
+			isPlayVisible: !this.state.isPlayVisible});
+		console.log("working");
 	}	
 	
 
@@ -59,7 +60,18 @@ class Album extends Component {
 		};
 		const showButtonOrNumber = {
 			display: "inline"
-		};	
+		};
+		
+		/*this needs work. I need to make it target just the "current playing" song but when I used this.setState(currentSong.innerHTML: style={hidButtonOrNumber}) as the "true" value return, currentSong was not defined. 
+I'm guessing this is because it is on the render side. But when I made the function on the other side, the other variables weren't defined. I'm confused about how to keep the references connected.*/
+		const showOrHideSongNumber = this.state.isPlaying === true ? hideButtonOrNumber : showButtonOrNumber;
+		
+		/*Similarly need help making this target just the (song, index) and not the entire list of songs. */
+		const showPlayOnHover = this.state.isPlayVisible === true ? showButtonOrNumber: hideButtonOrNumber;
+		
+		/*As this is, it shows up for all when something plays. For all three of these, I need to figure out how to specifically reference songs by index.*/
+		const showPauseOnPlay = this.state.isPlaying === true ? /*this doesn't work but I'd like it to ;) this.currentSong === song */ showButtonOrNumber: hideButtonOrNumber ;
+ 
 		return (
 			<section className="album">
 				<section id="album-info">
@@ -78,10 +90,10 @@ class Album extends Component {
 					</colgroup>
 					<tbody>
 						{	this.state.album.songs.map( (song, index) =>
-							<tr className="song" key={index} onClick={() => this.handleSongClick(song)} > 		
-		 						<span id="play-button" className="icon ion-md-play" style={hideButtonOrNumber}></span>
-								<span id="pause-button" className="icon ion-md-pause" style={hideButtonOrNumber}></span>
-									<td id="song-number" style={showButtonOrNumber}>Track {index}</td>
+							<tr className="song" key={index} onClick={() => this.handleSongClick(song)} onMouseEnter={() => this.togglePlayVisible(song, index)}> 		
+		 						<span id="play-button" className="icon ion-md-play" style={showPlayOnHover}></span>
+								<span id="pause-button" className="icon ion-md-pause" style={showPauseOnPlay}></span>
+									<td id="song-number" style={showOrHideSongNumber}>Track {index}</td>
 								<td id="song-title">{song.title}</td>
 								<td id="song-duration">{song.duration} seconds</td>
 							</tr>
