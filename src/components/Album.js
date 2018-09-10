@@ -55,7 +55,7 @@ class Album extends Component {
 
 
 	render() {
-		var obj = this.state.currentsong;
+		var obj = this.state.currentSong;
 		const hideButtonOrNumber = {
 			display: "none"
 		};
