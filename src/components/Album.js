@@ -17,16 +17,18 @@ class Album extends Component {
 			hoverStatus: false,
 			currentTime: 0,
 			duration: album.songs[0].duration,
+			volume: .5,
 		};		
 
 		this.audioElement = document.createElement('audio');
 		this.audioElement.src = album.songs[0].audioSrc;
+		this.audioElement.volume = this.state.volume;
 	}
 
 	componentDidMount() {
 		this.eventListeners = {
 			timeupdate: e => {
-				this.setState({ currentTime: this.audioElement.currentTime });
+				this.setState({ currentTime:this.audioElement.currentTime });
 			},
 			durationchange: e => {
 				this.setState({ duration: this.audioElement.duration });
@@ -75,7 +77,7 @@ class Album extends Component {
 		}	else {
 			return <span>{`${index+1}`}</span>
 		}
-	}
+	} 
 	
 	showPlay (song) {
 		this.setState({hoverSong: song});
@@ -110,8 +112,39 @@ class Album extends Component {
 		this.setState({ currentTime: newTime} ) ;
 	}
 
-	render() {
+	handleVolumeChange(e) {
+		const newVolume = e.target.value;
+		this.audioElement.volume = newVolume;
+		this.setState({ volume: newVolume });
+	}
+
+	handleVolumeUp() {
+		const volume = this.state.volume;
+		const stepRate = 0.10;
+		const newVolume = Math.min(1, (volume + stepRate));
+		this.audioElement.volume = newVolume;
+		this.setState({ volume: newVolume });
+	}
+
+	handleVolumeDown() {
+		const volume = this.state.volume;
+		const stepRate = 0.10;
+		const newVolume = Math.max(0, (volume - stepRate));
+		this.audioElement.volume = newVolume;
+		this.setState({ volume: newVolume });
+	}
+	
 		
+	render() {
+	const formatTime = (time) => {
+		const sec_num = parseInt(time, 10);
+		let minutes = Math.floor(sec_num / 60);
+		let seconds = sec_num - (minutes * 60);
+		if (seconds < 10) {seconds = "0"+seconds;}
+		else if (isNaN(time)) { return "-:--"}
+		return minutes+':'+seconds;				
+}
+	
 		return (
 			<section className="album">
 				<section id="album-info">
@@ -133,7 +166,7 @@ class Album extends Component {
 							<tr className="song" key={index} onClick={() => this.handleSongClick(song)} onMouseEnter={() => this.showPlay(song, index)} onMouseLeave={() => this.hidePlay(song, index)}> 		
 		 						<td>{this.handleTrack(song,index)}</td>
 								<td>{song.title}</td>
-								<td>{song.duration} seconds</td>
+								<td>{formatTime(song.duration)}</td>
 							</tr>
 							)
 						}
@@ -142,12 +175,16 @@ class Album extends Component {
 				<PlayerBar 
 					isPlaying={this.state.isPlaying} 
 					currentSong={this.state.currentSong}
-					currentTime={this.audioElement.currentTime}
-					duration={this.audioElement.duration}
+					currentTime={formatTime(this.audioElement.currentTime)}
+					duration={formatTime(this.audioElement.duration)}
+					volume={this.state.volume}
 					handleSongClick={() => this.handleSongClick(this.state.currentSong)} 
 					handlePrevClick={() => this.handlePrevClick()}
 					handleNextClick={() => this.handleNextClick()}
 					handleTimeChange={(e) => this.handleTimeChange(e)}
+					handleVolumeChange={(e) => this.handleVolumeChange(e)}
+					handleVolumeUp={() => this.handleVolumeUp()}
+					handleVolumeDown={() => this.handleVolumeDown()}
 				/>
 			</section>
 		);
