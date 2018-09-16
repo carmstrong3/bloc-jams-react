@@ -26,3 +26,219 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+html, body {
+  width: 100%;
+  margin: 0px;
+  padding: 0px;
+}
+
+body {
+  background: #6b5b95;
+}
+
+#header {
+  background: #6b5b95;
+  display: flex;
+  padding: 10px;
+  width: 98%;
+  top: 0;
+  position: relative;
+}
+
+#logo-brand {
+  flex: 4;
+}
+
+#logo {
+  height:60px;
+}
+
+#brand-name {
+  flex: 7;
+  font-size: 3em;
+  margin-left: 10px;
+  color: white;
+  text-align: left;
+  text-decoration: none;
+}
+
+nav p {
+  flex: 10; 
+}
+
+select {
+  flex: .5;
+  text-align: center;
+  background: #6b5b95;
+  color: white;
+  border-radius: 8px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  font-size: 1em;
+  font-weight: bold;
+}
+
+#body {
+  margin-bottom: 60px;
+}
+
+section .body {
+  text-align: center;
+}
+
+.landing {
+  margin: auto;
+  width: 40%;
+  border-style: inset;
+  border-width: 5px;
+  border-color: white;
+  border-radius: 8px;
+  text-align: center;
+  min-width: 30%;
+  max-width: 50%;
+  color: white;
+}
+
+h1 {
+	font-size: 1.75em;
+}
+.browse-button {
+  font-size: 2em;
+  width: 75%;
+  background: #878f99;
+  color: white;
+	border-radius: 8px;
+}
+
+.terms-privacy a:link {
+	text-decoration: underline;
+	color: white;
+}
+
+.terms-privacy a:visited {
+	text-decoration: underline;
+	color: white;
+}
+
+.terms-privacy a:hover {
+	text-decoration: underline;
+	color: white;
+}
+
+.terms-privacy a:active {
+	text-decoration: underline;
+	color: white;
+}
+
+.library-container {
+	margin: auto;
+  border-style: inset;
+  border-width: 5px;
+  border-color: white;
+  border-radius: 8px;
+  text-align: center;
+  min-width: 30%;
+  max-width: 80%;
+  color: white;
+	overflow: auto;
+	white-space: nowrap;
+}
+
+
+.album {
+	color: white;
+	text-decoration: none;
+	font-size: 2em;
+	display: inline-block;
+	padding: 20px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+
+.album-photo {
+	height: 400px;
+}
+
+.album-title {
+	
+}
+
+.album-artist {
+
+}
+
+.album-length {
+
+}
+
+.album-details h1 {
+	font-size: 1.5em;
+	margin: 0px;
+	padding: 0px;
+}
+
+.album-details h2 {
+	font-size: 1.20em;
+	margin: 0px;
+	padding: 0px;
+}
+
+.album-details #release-info {
+	font-size: 1em;
+	margin: 0px;
+	padding: 0px;
+}
+
+.song {
+	font-size: 1.15em;
+	color: white;
+	text-align: center;
+
+}
+
+.song-list {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+footer {
+  background: #b2ad7f;
+  position: relative;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+}
+
+nav #social-media {
+}
+
+.fa {
+    padding: 20px;
+    font-size: 30px;
+    width: 20px;
+		height: 20px;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 8px;
+}
+
+/* Add a hover effect if you want */
+.fa:hover {
+    opacity: 0.7;
+}
+
+/* Set a specific color for each brand */
+
+/* Facebook */
+.fa-facebook {
+    background: #3B5998;
+    color: white;
+}
+
+/* Twitter */
+.fa-twitter {
+    background: #55ACEE;
+    color: white;
+}
